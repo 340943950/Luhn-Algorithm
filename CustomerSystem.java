@@ -1,15 +1,15 @@
 /*
- * Date: April 2, 2021
- * Name: Adarsh Padalia and Vaughn Chan
- * Teacher: Mr. Ho
- * Description: Creating a customer validation and information storage system
- * */
+* Date: April 2, 2021
+* Name: Adarsh Padalia and Vaughn Chan
+* Teacher: Mr. Ho
+* Description: Creating a customer validation and information storage system
+*/
 
 import java.util.Scanner;
 // More packages may be imported in the space below
 
 class CustomerSystem {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
         String userInput, enterCustomerOption, generateCustomerOption, exitCondition;
@@ -24,7 +24,7 @@ class CustomerSystem {
             printMenu();                                    // Printing out the main menu
             userInput = reader.nextLine();                  // User selection from the menu
 
-            if (userInput.equals(enterCustomerOption)){
+            if (userInput.equals(enterCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
                 enterCustomerInfo();
@@ -42,7 +42,7 @@ class CustomerSystem {
         reader.close();
         System.out.println("Program Terminated");
     }
-    public static void printMenu(){
+    public static void printMenu() {
         System.out.println("Customer and Sales System\n"
         .concat("1. Enter Customer Information\n")
         .concat("2. Generate Customer data file\n")
@@ -64,23 +64,60 @@ class CustomerSystem {
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validatePostalCode(){
+    public static void validatePostalCode() {
     }
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validateCreditCard(){
+    public static boolean validateCreditCard(long creditNum) {
+        long tempCreditNum = creditNum;
+        creditNum = 0;
+        while(tempCreditNum != 0) {
+            long digit = tempCreditNum % 10;
+            creditNum = creditNum * 10 + digit;
+            tempCreditNum /= 10;
+        }
+
+        int counter = 1;
+        int sum = 0;
+        while(creditNum != 0) {
+            long digit = creditNum % 10;
+
+            if (counter % 2 == 1) {
+                sum += digit;
+            }
+            else {
+                sum += sumDigits(digit*2);
+            }
+
+            creditNum /= 10;
+            counter += 1;
+        }
+
+        boolean valid = sum % 10 == 0;
+        return valid;
     }
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void generateCustomerDataFile(){
+    public static void generateCustomerDataFile() {
     }
-    /*******************************************************************
-    *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
-    *******************************************************************/
+    /*
+    * This method takes in a value and outputs the sum of its digits
+    * 
+    * @param long num
+    * @return int sum
+    */
+    public static int sumDigits (long num) {
+        int sum = 0;
+        while(num != 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+        return sum;
+    }
 }
