@@ -1,1 +1,5 @@
-// Hello World
+class FileReader {
+    public static void main(String[] args) throws FileNotFoundException {
+        // Test
+    }
+}
