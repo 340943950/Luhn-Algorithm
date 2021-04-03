@@ -7,6 +7,9 @@
 
 import java.util.Scanner;
 // More packages may be imported in the space below
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 class CustomerSystem {
     public static void main(String[] args) {
@@ -18,7 +21,7 @@ class CustomerSystem {
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
-
+		String currentCustomerData = "This is a placeholder text";
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -31,7 +34,8 @@ class CustomerSystem {
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
-                generateCustomerDataFile();
+                // generateCustomerDataFile();
+				generateFile(currentCustomerData, "./", "customer-data.csv");
             }
             else{
                 System.out.println("Please type in a valid option (A number from 1-9)");
@@ -99,19 +103,36 @@ class CustomerSystem {
         boolean valid = sum % 10 == 0;
         return valid;
     }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
-    public static void generateCustomerDataFile() {
-    }
-    /*
-    * This method takes in a value and outputs the sum of its digits
-    * 
-    * @param long num
-    * @return int sum
-    */
+
+	/**
+	 * Method that writes a string to a file
+	 * 
+	 * @param String info    	    The string to output to the file
+	 * @param String fileLocation   Where the file should be made/edited
+	 * @param String fileName 		The name of the file that should be created.
+	 */	
+	public static void generateFile(String info, String fileLocation, String fileName){
+		try {
+			// Open the file at the specific location
+			File file = new File(fileLocation + fileName);
+
+			// Write to file
+			PrintWriter printWriter = new PrintWriter(file);
+			printWriter.println(info);
+			printWriter.close();
+
+			// In case anything goes wrong
+		} catch (FileNotFoundException e) {
+			System.out.println("Error: " + e);
+		}
+	}
+	
+	/*
+	* This method takes in a value and outputs the sum of its digits
+	* 
+	* @param long num
+	* @return int sum
+	*/
     public static int sumDigits (long num) {
         int sum = 0;
         while(num != 0) {
