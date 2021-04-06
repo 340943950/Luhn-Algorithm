@@ -126,6 +126,37 @@ class CustomerSystem {
 			System.out.println("Error: " + e);
 		}
 	}
+
+	/**
+	 * Assigns a unique number ID per line given a file
+	 * 
+	 * @param String filename	The file to assign unique IDs on
+	 */
+	public static void assignUniqueId(String fileName) {
+		try {
+			// Open the file at the specific location
+			File file = new File(fileName);
+			Scanner fileScanner = new Scanner(file);
+
+			// Sort through each line in the file and add them to a temporary string
+			String fileTempBuffer = "";
+			int line = 1;
+			while(fileScanner.hasNextLine()) {
+				fileTempBuffer += (fileScanner.nextLine() + ",#" + line + "\n");
+				line++;
+			}
+			fileScanner.close();
+
+			// Write the temporary string into the file
+			PrintWriter printWriter = new PrintWriter(file);
+			printWriter.println(fileTempBuffer);
+			printWriter.close();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("Error: " + e);
+			System.out.println("\u001b[31m" + "Please enter a file that exists." + "\u001b[0m\n");
+		}
+	}
 	
 	/*
 	* This method takes in a value and outputs the sum of its digits
