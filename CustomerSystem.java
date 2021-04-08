@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -32,15 +33,13 @@ class CustomerSystem {
             if (userInput.equals(enterCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
-                currentCustomerData += (enterCustomerInfo(reader) + "\n");
+                currentCustomerData = (enterCustomerInfo(reader) + "\n");
                 System.out.println("\n");
-                System.out.println(currentCustomerData);
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
                 // generateCustomerDataFile();
-                generateFile(currentCustomerData, "./", "customer-data.csv");
-                currentCustomerData = "";                   // Resets current customer data because it already got written into the file
+				generateFile(currentCustomerData, "./", "customer-data.csv");
             }
             else{
                 System.out.println("Please type in a valid option (A number from 1-9)");
@@ -204,24 +203,27 @@ class CustomerSystem {
 			// Open the file at the specific location
 			File file = new File(fileLocation + fileName);
 
-			// Stash all the previous content
-			Scanner fileScanner = new Scanner(file);
+			// Stash all the previous content if there is any
 			String previousContents = "";
-			while (fileScanner.hasNextLine()) {
-				previousContents += (fileScanner.nextLine() + "\n");
-			}
-			fileScanner.close();
+			if (file.exists() && file.length() != 0) {
+				Scanner fileScanner = new Scanner(file);
+				while (fileScanner.hasNextLine()) {
+					previousContents += (fileScanner.nextLine() + "\n");
+				}
+				fileScanner.close();
 
-			// Remove the "\n" from the end of previous content
-			previousContents = previousContents.substring(0, previousContents.length() - 1);
+				// Remove the "\n" from the end of previous content
+				previousContents = previousContents.substring(0, previousContents.length() - 1);
+			}
 
 			// Write to file
 			PrintWriter printWriter = new PrintWriter(file);
 			printWriter.println(previousContents + info);
-            printWriter.close();
+			printWriter.close();
+		}
 
 		// In case anything goes wrong
-		} catch (FileNotFoundException e) {
+		 catch (FileNotFoundException e) {
 			System.out.println("Error: " + e);
 		}
 	}
