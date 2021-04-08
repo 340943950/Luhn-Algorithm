@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +24,7 @@ class CustomerSystem {
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
-		String currentCustomerData = "This is a placeholder text";
+		String currentCustomerData = "";
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -32,7 +33,7 @@ class CustomerSystem {
             if (userInput.equals(enterCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
-                currentCustomerData = enterCustomerInfo(reader);
+                currentCustomerData = (enterCustomerInfo(reader) + "\n");
                 System.out.println("\n");
             }
             else if (userInput.equals(generateCustomerOption)) {
@@ -202,9 +203,20 @@ class CustomerSystem {
 			// Open the file at the specific location
 			File file = new File(fileLocation + fileName);
 
+			// Stash all the previous content
+			Scanner fileScanner = new Scanner(file);
+			String previousContents = "";
+			while (fileScanner.hasNextLine()) {
+				previousContents += (fileScanner.nextLine() + "\n");
+			}
+			fileScanner.close();
+
+			// Remove the "\n" from the end of previous content
+			previousContents = previousContents.substring(0, previousContents.length() - 1);
+
 			// Write to file
 			PrintWriter printWriter = new PrintWriter(file);
-			printWriter.println(info);
+			printWriter.println(previousContents + info);
 			printWriter.close();
 
 		// In case anything goes wrong
