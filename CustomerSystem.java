@@ -8,6 +8,7 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.io.BufferedReader;
@@ -204,23 +205,15 @@ class CustomerSystem {
 		try {
 			// Open the file at the specific location
 			File file = new File(fileLocation + fileName);
+			PrintWriter printWriter = new PrintWriter(new FileOutputStream(file, true));
 
-			// Stash all the previous content if there is any
-			String previousContents = "";
-			if (file.exists() && file.length() != 0) {
-				Scanner fileScanner = new Scanner(file);
-				while (fileScanner.hasNextLine()) {
-					previousContents += (fileScanner.nextLine() + "\n");
-				}
-				fileScanner.close();
-
-				// Remove the "\n" from the end of previous content
-				previousContents = previousContents.substring(0, previousContents.length() - 1);
+			// Add a column header if doesn't exist or is empty
+			if (!file.exists() || file.length() == 0) {
+				printWriter.println("First Name,Last Name,City,Card#,Postal,");
 			}
 
 			// Write to file
-			PrintWriter printWriter = new PrintWriter(file);
-			printWriter.println(previousContents + info);
+			printWriter.print(info);
 			printWriter.close();
 		}
 
