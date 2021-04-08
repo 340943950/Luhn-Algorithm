@@ -33,13 +33,15 @@ class CustomerSystem {
             if (userInput.equals(enterCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
-                currentCustomerData = (enterCustomerInfo(reader) + "\n");
+                currentCustomerData += (enterCustomerInfo(reader) + "\n");
                 System.out.println("\n");
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
                 // generateCustomerDataFile();
-				generateFile(currentCustomerData, "./", "customer-data.csv");
+                generateFile(currentCustomerData, "./", "customer-data.csv");
+                System.out.println("\n");
+                currentCustomerData = "";
             }
             else{
                 System.out.println("Please type in a valid option (A number from 1-9)");
