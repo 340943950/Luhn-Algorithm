@@ -1,9 +1,9 @@
 /*
-* Date: April 2, 2021
-* Name: Adarsh Padalia and Vaughn Chan
-* Teacher: Mr. Ho
-* Description: Creating a customer validation and information storage system
-*/
+ * Date: April 2, 2021
+ * Name: Adarsh Padalia and Vaughn Chan
+ * Teacher: Mr. Ho
+ * Description: Creating a customer validation and information storage system
+ */
 
 import java.util.Scanner;
 import java.io.File;
@@ -49,12 +49,12 @@ class CustomerSystem {
     }
     public static void printMenu() {
         System.out.println("Customer and Sales System\n"
-        .concat("1. Enter Customer Information\n")
-        .concat("2. Generate Customer data file\n")
-        .concat("3. Report on total Sales (Not done in this part)\n")
-        .concat("4. Check for fraud in sales data (Not done in this part)\n")
-        .concat("9. Quit\n")
-        .concat("Enter menu option (1-9)")
+                            .concat("1. Enter Customer Information\n")
+                            .concat("2. Generate Customer data file\n")
+                            .concat("3. Report on total Sales (Not done in this part)\n")
+                            .concat("4. Check for fraud in sales data (Not done in this part)\n")
+                            .concat("9. Quit\n")
+                            .concat("Enter menu option (1-9)")
         );
     }
     /*
@@ -138,10 +138,10 @@ class CustomerSystem {
         return valid;
     }
     /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
+	 * This method may be edited to achieve the task however you like.
+	 * The method may not nesessarily be a void return type
+	 * This method may also be broken down further depending on your algorithm
+	 */
     public static boolean validateCreditCard(long creditNum) {
         if (creditNum/Math.pow(10, 9) < 1) {
             return false;
@@ -198,13 +198,44 @@ class CustomerSystem {
 			System.out.println("Error: " + e);
 		}
 	}
+
+	/**
+	 * Assigns a unique number ID per line given a file
+	 * 
+	 * @param String filename	The file to assign unique IDs on
+	 */
+	public static void assignUniqueId(String fileName) {
+		try {
+			// Open the file at the specific location
+			File file = new File(fileName);
+			Scanner fileScanner = new Scanner(file);
+
+			// Sort through each line in the file and add them to a temporary string
+			String fileTempBuffer = "";
+			int line = 1;
+			while(fileScanner.hasNextLine()) {
+				fileTempBuffer += (fileScanner.nextLine() + ",#" + line + "\n");
+				line++;
+			}
+			fileScanner.close();
+
+			// Write the temporary string into the file
+			PrintWriter printWriter = new PrintWriter(file);
+			printWriter.println(fileTempBuffer);
+			printWriter.close();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("Error: " + e);
+			System.out.println("\u001b[31m" + "Please enter a file that exists." + "\u001b[0m\n");
+		}
+	}
 	
-	/*
-	* This method takes in a value and outputs the sum of its digits
-	* 
-	* @param long num
-	* @return int sum
-	*/
+	/**
+	 * This method takes in a value and outputs the sum of its digits
+	 * 
+	 * @param long num
+	 * @return int sum
+	 */
     public static int sumDigits (long num) {
         int sum = 0;
         while(num != 0) {
