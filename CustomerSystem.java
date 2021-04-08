@@ -1,9 +1,9 @@
 /*
-* Date: April 2, 2021
-* Name: Adarsh Padalia and Vaughn Chan
-* Teacher: Mr. Ho
-* Description: Creating a customer validation and information storage system
-*/
+ * Date: April 2, 2021
+ * Name: Adarsh Padalia and Vaughn Chan
+ * Teacher: Mr. Ho
+ * Description: Creating a customer validation and information storage system
+ */
 
 import java.util.Scanner;
 // More packages may be imported in the space below
@@ -48,33 +48,33 @@ class CustomerSystem {
     }
     public static void printMenu() {
         System.out.println("Customer and Sales System\n"
-        .concat("1. Enter Customer Information\n")
-        .concat("2. Generate Customer data file\n")
-        .concat("3. Report on total Sales (Not done in this part)\n")
-        .concat("4. Check for fraud in sales data (Not done in this part)\n")
-        .concat("9. Quit\n")
-        .concat("Enter menu option (1-9)\n")
-        );
+						   .concat("1. Enter Customer Information\n")
+						   .concat("2. Generate Customer data file\n")
+						   .concat("3. Report on total Sales (Not done in this part)\n")
+						   .concat("4. Check for fraud in sales data (Not done in this part)\n")
+						   .concat("9. Quit\n")
+						   .concat("Enter menu option (1-9)\n")
+						   );
     }
     /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
+	 * This method may be edited to achieve the task however you like.
+	 * The method may not nesessarily be a void return type
+	 * This method may also be broken down further depending on your algorithm
+	 */
     public static void enterCustomerInfo() {
     }
     /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
+	 * This method may be edited to achieve the task however you like.
+	 * The method may not nesessarily be a void return type
+	 * This method may also be broken down further depending on your algorithm
+	 */
     public static void validatePostalCode() {
     }
     /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
+	 * This method may be edited to achieve the task however you like.
+	 * The method may not nesessarily be a void return type
+	 * This method may also be broken down further depending on your algorithm
+	 */
     public static boolean validateCreditCard(long creditNum) {
         long tempCreditNum = creditNum;
         creditNum = 0;
@@ -158,12 +158,12 @@ class CustomerSystem {
 		}
 	}
 	
-	/*
-	* This method takes in a value and outputs the sum of its digits
-	* 
-	* @param long num
-	* @return int sum
-	*/
+	/**
+	 * This method takes in a value and outputs the sum of its digits
+	 * 
+	 * @param long num
+	 * @return int sum
+	 */
     public static int sumDigits (long num) {
         int sum = 0;
         while(num != 0) {
