@@ -45,7 +45,7 @@ class CustomerSystem {
                 currentCustomerData = "";
             }
             // Only trigger reinput if exit condition isn't typed and other consitions haven't triggeres
-            else if (!(userInput.equals(generateCustomerOption))) {
+            else if (!(userInput.equals(exitCondition))) {
                 System.out.println("Please type in a valid option (A number from 1-9)");
             }
         } while (!userInput.equals(exitCondition));         // Exits once the user types 
