@@ -9,7 +9,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -40,7 +39,8 @@ class CustomerSystem {
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
                 // generateCustomerDataFile();
-				generateFile(currentCustomerData, "./", "customer-data.csv");
+                generateFile(currentCustomerData, "./", "customer-data.csv");
+                currentCustomerData = "";                   // Resets current customer data because it already got written into the file
             }
             else{
                 System.out.println("Please type in a valid option (A number from 1-9)");
@@ -218,7 +218,7 @@ class CustomerSystem {
 			// Write to file
 			PrintWriter printWriter = new PrintWriter(file);
 			printWriter.println(previousContents + info);
-			printWriter.close();
+            printWriter.close();
 
 		// In case anything goes wrong
 		} catch (FileNotFoundException e) {
