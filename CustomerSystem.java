@@ -115,6 +115,13 @@ class CustomerSystem {
      * @return boolean valid            Whether or not the inputted postal code is valid
      */
     public static boolean validatePostalCode(String postalCode, String fileName) throws IOException {
+        try {
+            postalCode = postalCode.substring(0,3);
+        }
+        catch (Exception e) {
+            return false;
+        }
+
         File textFile = new File (fileName);
         boolean valid = false;
 
