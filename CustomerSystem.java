@@ -57,11 +57,12 @@ class CustomerSystem {
                             .concat("Enter menu option (1-9)")
         );
     }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
+    /**
+     * This method takes in a Scanner and reads in user input to generate a csv string
+     * 
+     * @param Scanner reader            The reader that reads in user input
+     * @return String output            The csv string to be outputted
+     */
     public static String enterCustomerInfo(Scanner reader) throws IOException {
         System.out.println("\nWhat is the customer's first name?");
         String firstName = reader.nextLine();
@@ -104,11 +105,14 @@ class CustomerSystem {
         String output = firstName + "," + lastName + "," + city + "," + creditCard + "," + postalCode;
         return output;
     }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
+    /**
+     * Takes in a fileName with multiple postal codes and a postal code and then checks
+     * whether that postal code is in the file
+     * 
+     * @param String postalCode         The postalCode to be validated
+     * @param String fileName           The name of the file with all the valid postal codes
+     * @return boolean valid            Whether or not the inputted postal code is valid
+     */
     public static boolean validatePostalCode(String postalCode, String fileName) throws IOException {
         File textFile = new File (fileName);
         boolean valid = false;
@@ -137,11 +141,13 @@ class CustomerSystem {
         fileReader.close();
         return valid;
     }
-    /*
-	 * This method may be edited to achieve the task however you like.
-	 * The method may not nesessarily be a void return type
-	 * This method may also be broken down further depending on your algorithm
-	 */
+    /**
+     * This method takes in a credit card number and checks if it is valid
+     * using the Luhn algorithm
+     * 
+     * @param long creditNum            The credit card number to be validated
+     * @return boolean valid            Whether or not the credit card number inputted is valid
+     */
     public static boolean validateCreditCard(long creditNum) {
         if (creditNum/Math.pow(10, 9) < 1) {
             return false;
