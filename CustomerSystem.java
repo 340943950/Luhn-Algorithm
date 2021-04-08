@@ -253,8 +253,8 @@ class CustomerSystem {
 			}
 			fileScanner.close();
 
-			// Remove the new line at the end of the buffer (Should not make a new line there)
-			fileTempBuffer = fileTempBuffer.substring(0, fileTempBuffer.length() - 1);
+			// Remove the newline and comma at the end
+			fileTempBuffer = fileTempBuffer.substring(0, fileTempBuffer.length() - 2);
 
 			// Write the temporary string into the file
 			PrintWriter printWriter = new PrintWriter(new FileOutputStream(file, false));
