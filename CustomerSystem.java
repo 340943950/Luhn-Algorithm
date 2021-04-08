@@ -91,7 +91,7 @@ class CustomerSystem {
         boolean validPostalCode;
         reader.nextLine();
         do {
-            System.out.println("\nWhat is the customer's postal code (please enter a valid postal code)?");
+            System.out.println("\nWhat is the customer's postal code (please enter a valid postal code - all caps)?");
             try {
                 postalCode = reader.nextLine();
             }
