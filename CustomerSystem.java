@@ -9,7 +9,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -43,7 +42,8 @@ class CustomerSystem {
                 System.out.println("\n");
                 currentCustomerData = "";
             }
-            else{
+            // Only trigger reinput if exit condition isn't typed and other consitions haven't triggeres
+            else if (!(userInput.equals(generateCustomerOption))) {
                 System.out.println("Please type in a valid option (A number from 1-9)");
             }
         } while (!userInput.equals(exitCondition));         // Exits once the user types 
