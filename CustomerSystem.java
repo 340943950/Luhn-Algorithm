@@ -41,6 +41,7 @@ class CustomerSystem {
                 // Only the line below may be editted based on the parameter list and how you design the method return
                 // generateCustomerDataFile();
                 generateFile(currentCustomerData, "./", "customer-data.csv");
+				assignUniqueId("./customer-data.csv");
                 System.out.println("\n");
                 currentCustomerData = "";
             }
@@ -209,7 +210,7 @@ class CustomerSystem {
 
 			// Add a column header if doesn't exist or is empty
 			if (!file.exists() || file.length() == 0) {
-				printWriter.println("First Name,Last Name,City,Card#,Postal,");
+				printWriter.println("First Name,Last Name,City,Credit Card,Postal,Id,");
 			}
 
 			// Write to file
@@ -236,21 +237,34 @@ class CustomerSystem {
 
 			// Sort through each line in the file and add them to a temporary string
 			String fileTempBuffer = "";
-			int line = 1;
+			int line = 0;
 			while(fileScanner.hasNextLine()) {
-				fileTempBuffer += (fileScanner.nextLine() + ",#" + line + "\n");
+				String id = ",#" + line + ",";
+				String currentLine = fileScanner.nextLine();
+				
+				// Make sure that the id was not already assigned (or if it's a header row)
+				if (!currentLine.contains(id) && line != 0) {
+					fileTempBuffer += (currentLine + id + "\n");
+				} else {
+					fileTempBuffer += (currentLine + "\n");
+				}
+				
 				line++;
 			}
 			fileScanner.close();
 
+			// Remove the new line at the end of the buffer (Should not make a new line there)
+			fileTempBuffer = fileTempBuffer.substring(0, fileTempBuffer.length() - 1);
+
 			// Write the temporary string into the file
-			PrintWriter printWriter = new PrintWriter(file);
+			PrintWriter printWriter = new PrintWriter(new FileOutputStream(file, false));
 			printWriter.println(fileTempBuffer);
 			printWriter.close();
-			
+
+			// An error caused by file not being available
 		} catch (FileNotFoundException e) {
 			System.out.println("Error: " + e);
-			System.out.println("\u001b[31m" + "Please enter a file that exists." + "\u001b[0m\n");
+			System.out.println("\u001b[31m" + "That file name does not exist." + "\u001b[0m\n");
 		}
 	}
 	
